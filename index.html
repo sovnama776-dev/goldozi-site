@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="گلدوزی دلوان تیک – هنر گلدوزی دست‌ساز ایرانی">
+<title>گلدوزی دلوان تیک</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* ═══════════════ متغیرهای رنگ ═══════════════ */
+:root {
+  --emerald: #0f3d2e;
+  --emerald-light: #1a5c44;
+  --gold: #d4af37;
+  --gold-light: #e8c766;
+  --cream: #faf6ef;
+  --dark: #1a1a1a;
+}
+
+/* ═══════════════ ریست ═══════════════ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Vazirmatn', Tahoma, sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ═══════════════ صفحه لودینگ ═══════════════ */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--emerald);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s, visibility 0.6s;
+}
+
+.loader.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader .logo-anim {
+  font-size: 3rem;
+  color: var(--gold);
+  animation: pulse 1.2s infinite;
+}
+
+.loader p {
+  color: var(--gold-light);
+  margin-top: 15px;
+  font-size: 1.1rem;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* ═══════════════ نوار بالا ═══════════════ */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  background: rgba(15, 61, 46, 0.95);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo i {
+  font-size: 1.5rem;
+}
+
+/* ═══════════════ دکمه همبرگری ═══════════════ */
+.hamburger {
+  width: 45px;
+  height: 45px;
+  background: var(--gold);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1100;
+  transition: transform 0.3s;
+}
+
+.hamburger:hover {
+  transform: scale(1.05);
+}
+
+.hamburger span {
+  width: 22px;
+  height: 2.5px;
+  background: var(--emerald);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ═══════════════ منوی کشویی راست‌چین ═══════════════ */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100vh;
+  background: linear-gradient(180deg, var(--emerald) 0%, var(--emerald-light) 100%);
+  z-index: 1050;
+  transition: right 0.4s cubic-bezier(0.68, -0.15, 0.27, 1.15);
+  padding: 90px 0 30px;
+  box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+}
+
+.side-menu.open {
+  right: 0;
+}
+
+.side-menu a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 30px;
+  color: var(--cream);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+  border-right: 4px solid transparent;
+}
+
+.side-menu a:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-right-color: var(--gold);
+  color: var(--gold);
+  padding-right: 40px;
+}
+
+.side-menu a i {
+  width: 35px;
+  height: 35px;
+  background: rgba(212, 175, 55, 0.15);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 0.95rem;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ═══════════════ بخش Hero ═══════════════ */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-light) 50%, #2d7a5c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 20px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+  top: -100px;
+  left: -100px;
+  border-radius: 50%;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+  bottom: -50px;
+  right: -50px;
+  border-radius: 50%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 1s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  color: #fff;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.hero h1 span {
+  color: var(--gold);
+  display: block;
+}
+
+.hero p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.1rem;
+  max-width: 500px;
+  margin: 0 auto 30px;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 14px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--emerald);
+}
+
+.btn-gold:hover {
+  background: var(--gold-light);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+}
+
+.btn-outline {
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ═══════════════ نوار اعتماد ═══════════════ */
+.trust-bar {
+  background: var(--gold);
+  padding: 20px 5%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--emerald);
+  font-weight: 700;
+}
+
+.trust-item i {
+  font-size: 1.4rem;
+}
+
+/* ═══════════════ بنر تخفیف و تایمر ═══════════════ */
+.offer-banner {
+  background: linear-gradient(135deg, #8b2635, #c0392b);
+  color: #fff;
+  text-align: center;
+  padding: 30px 20px;
+  margin: 40px 5%;
+  border-radius: 20px;
+}
+
+.offer-banner h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.offer-banner p {
+  opacity: 0.9;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.count-box {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 12px 18px;
+  border-radius: 12px;
+  min-width: 75px;
+}
+
+.count-box .num {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.count-box .lbl {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+/* ═══════════════ نوار آمار ═══════════════ */
+.stats-bar {
+  background: #fff;
+  margin: -60px auto 0;
+  max-width: 900px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(15, 61, 46, 0.15);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  padding: 30px;
+  gap: 20px;
+  position: relative;
+  z-index: 5;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-item i {
+  font-size: 1.8rem;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.stat-item .num {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--emerald);
+}
+
+.stat-item .label {
+  color: #777;
+  font-size: 0.85rem;
+}
+
+/* ═══════════════ بخش‌های عمومی ═══════════════ */
+section {
+  padding: 70px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-header .tag {
+  color: var(--gold);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  color: var(--emerald);
+  margin-top: 8px;
+}
+
+.section-header .line {
+  width: 60px;
+  height: 3px;
+  background: var(--gold);
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+
+/* ═══════════════ دکمه‌های فیلتر ═══════════════ */
+.filter-btns {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 35px;
+}
+
+.filter-btn {
+  padding: 10px 22px;
+  border-radius: 50px;
+  border: 2px solid var(--emerald);
+  background: transparent;
+  color: var(--emerald);
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--emerald);
+  color: var(--gold);
+}
+
+/* ═══════════════ کارت محصولات ═══════════════ */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(15, 61, 46, 0.15);
+}
+
+.product-card.hide {
+  display: none;
+}
+
+.product-img {
+  height: 230px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.product-card:hover .product-img img {
+  transform: scale(1.1);
+}
+
+.product-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: var(--gold);
+  color: var(--emerald);
+  padding: 5px 15px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.product-info {
+  padding: 22px;
+}
+
+.product-info h3 {
+  color: var(--emerald);
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.product-info p {
+  color: #666;
+  font-size: 0.92rem;
+}
+
+.product-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--emerald);
+  margin: 15px 0;
+}
+
+.product-price .old {
+  font-size: 0.9rem;
+  color: #aaa;
+  text-decoration: line-through;
+  margin-left: 8px;
+  font-weight: 400;
+}
+
+.product-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-order {
+  flex: 1;
+  background: var(--emerald);
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-order:hover {
+  background: var(--gold);
+  color: var(--emerald);
+}
+
+/* ═══════════════ لایت‌باکس (بزرگ‌نمایی عکس) ═══════════════ */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox.show {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 15px;
+}
+
+.lightbox .close-lb {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  color: #fff;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+/* ═══════════════ بخش ویدیو ═══════════════ */
+.video-box {
+  position: relative;
+  padding-bottom: 56.25%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  background: var(--emerald);
+}
+
+.video-box iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ═══════════════ بخش نظرات ═══════════════ */
+.testimonials {
+  background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-light) 100%);
+  border-radius: 30px;
+  padding: 60px 30px;
+}
+
+.testimonials .section-header h2 {
+  color: #fff;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.testimonial-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 24px;
+  border-radius: 15px;
+  color: #fff;
+}
+
+.stars {
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.testimonial-card p {
+  font-size: 0.92rem;
+  margin-bottom: 15px;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.author-avatar {
+  width: 42px;
+  height: 42px;
+  background: var(--gold);
+  color: var(--emerald);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* ═══════════════ سوالات متداول (FAQ) ═══════════════ */
+.faq-item {
+  background: #fff;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.faq-q {
+  padding: 20px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--emerald);
+}
+
+.faq-q i {
+  transition: transform 0.3s;
+  color: var(--gold);
+}
+
+.faq-item.open .faq-q i {
+  transform: rotate(180deg);
+}
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s;
+  color: #666;
+  padding: 0 25px;
+}
+
+.faq-item.open .faq-a {
+  max-height: 200px;
+  padding: 0 25px 20px;
+}
+
+/* ═══════════════ فرم سفارش شخصی ═══════════════ */
+.order-form {
+  background: #fff;
+  border-radius: 20px;
+  padding: 35px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.order-form input,
+.order-form textarea {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.order-form input:focus,
+.order-form textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.order-form button {
+  width: 100%;
+  background: var(--emerald);
+  color: #fff;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.order-form button:hover {
+  background: var(--gold);
+  color: var(--emerald);
+}
+
+/* ═══════════════ بخش تماس ═══════════════ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+}
+
+.contact-item {
+  text-align: center;
+  padding: 25px 15px;
+  background: #fff;
+  border-radius: 15px;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: var(--dark);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.contact-item:hover {
+  background: var(--emerald);
+  color: #fff;
+  transform: translateY(-5px);
+}
+
+.contact-item:hover i {
+  color: var(--gold);
+}
+
+.contact-item i {
+  font-size: 1.8rem;
+  color: var(--emerald);
+  margin-bottom: 12px;
+  transition: 0.3s;
+}
+
+.contact-item .title {
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.contact-item .value {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* ═══════════════ دکمه‌های شناور ═══════════════ */
+.float-wa {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 55px;
+  height: 55px;
+  background: #25d366;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  z-index: 900;
+  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+  text-decoration: none;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.float-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: var(--emerald);
+  color: var(--gold);
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  z-index: 900;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.float-top.show {
+  display: flex;
+}
+
+/* ═══════════════ فوتر ═══════════════ */
+footer {
+  background: var(--emerald);
+  color: var(--cream);
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 60px;
+}
+
+footer .logo {
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+footer p {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+/* ═══════════════ واکنش‌گرا (موبایل) ═══════════════ */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+  section {
+    padding: 50px 5%;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ صفحه لودینگ ═══════════════ -->
+<div class="loader" id="loader">
+  <i class="fas fa-spa logo-anim"></i>
+  <p>گلدوزی دلوان تیک</p>
+</div>
+
+<!-- ═══════════════ نوار بالا ═══════════════ -->
+<nav class="navbar">
+  <div class="logo">
+    <i class="fas fa-spa"></i>
+    گلدوزی دلوان تیک
+  </div>
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</nav>
+
+<!-- ═══════════════ منوی کشویی راست‌چین ═══════════════ -->
+<div class="side-menu" id="sideMenu">
+  <a href="#home"><i class="fas fa-home"></i> خانه</a>
+  <a href="#products"><i class="fas fa-gem"></i> محصولات</a>
+  <a href="#lessons"><i class="fas fa-graduation-cap"></i> آموزش‌ها</a>
+  <a href="#video"><i class="fas fa-play-circle"></i> ویدیو کار</a>
+  <a href="#testimonials"><i class="fas fa-star"></i> نظرات مشتریان</a>
+  <a href="#faq"><i class="fas fa-question-circle"></i> سوالات متداول</a>
+  <a href="#order"><i class="fas fa-clipboard-list"></i> سفارش شخصی</a>
+  <a href="#contact"><i class="fas fa-phone-alt"></i> تماس با ما</a>
+  <a href="https://instagram.com/goldozi_delvan" target="_blank"><i class="fab fa-instagram"></i> اینستاگرام</a>
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<!-- ═══════════════ بخش Hero ═══════════════ -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-award"></i> هنر اصیل ایرانی</div>
+    <h1>گلدوزی دلوان تیک <span>هنر دست‌های خلاق</span></h1>
+    <p>طرح‌های مجلسی، عروس و روزمره با نخ طلایی و حریر اصیل — دوخته‌شده با عشق در دل خراسان</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn btn-gold"><i class="fas fa-gem"></i> مشاهده محصولات</a>
+      <a href="tel:09902961185" class="btn btn-outline"><i class="fas fa-phone-alt"></i> تماس فوری</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ نوار اعتماد ═══════════════ -->
+<div class="trust-bar">
+  <div class="trust-item"><i class="fas fa-check-circle"></i> ضمانت کیفیت</div>
+  <div class="trust-item"><i class="fas fa-truck"></i> ارسال به سراسر ایران</div>
+  <div class="trust-item"><i class="fas fa-hand-sparkles"></i> دست‌دوز اصیل</div>
+</div>
+
+<!-- ═══════════════ نوار آمار ═══════════════ -->
+<div class="stats-bar">
+  <div class="stat-item"><i class="fas fa-heart"></i><div class="num">+۲۵۰</div><div class="label">کار تحویل‌شده</div></div>
+  <div class="stat-item"><i class="fas fa-users"></i><div class="num">+۱۲۰</div><div class="label">مشتری راضی</div></div>
+  <div class="stat-item"><i class="fas fa-medal"></i><div class="num">+۱۰</div><div class="label">سال تجربه</div></div>
+  <div class="stat-item"><i class="fas fa-graduation-cap"></i><div class="num">+۸۰</div><div class="label">هنرجو</div></div>
+</div>
+
+<!-- ═══════════════ بنر تخفیف و تایمر ═══════════════ -->
+<div class="offer-banner">
+  <h3><i class="fas fa-fire"></i> تخفیف ویژه این هفته — تا ۲۰٪</h3>
+  <p>فرصت محدود! همین حالا سفارش بدید</p>
+  <div class="countdown" id="countdown">
+    <div class="count-box"><div class="num" id="cd-days">۰</div><div class="lbl">روز</div></div>
+    <div class="count-box"><div class="num" id="cd-hours">۰</div><div class="lbl">ساعت</div></div>
+    <div class="count-box"><div class="num" id="cd-mins">۰</div><div class="lbl">دقیقه</div></div>
+    <div class="count-box"><div class="num" id="cd-secs">۰</div><div class="lbl">ثانیه</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════ بخش محصولات ═══════════════ -->
+<section id="products">
+  <div class="section-header">
+    <div class="tag">✦ نمونه کارها ✦</div>
+    <h2>محصولات ویژه</h2>
+    <div class="line"></div>
+  </div>
+  <div class="filter-btns">
+    <button class="filter-btn active" data-filter="all">همه</button>
+    <button class="filter-btn" data-filter="مجلسی">مجلسی</button>
+    <button class="filter-btn" data-filter="عروس">عروس</button>
+    <button class="filter-btn" data-filter="روزمره">روزمره</button>
+  </div>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<!-- ═══════════════ بخش آموزش‌ها ═══════════════ -->
+<section id="lessons">
+  <div class="section-header">
+    <div class="tag">✦ یادگیری ✦</div>
+    <h2>دوره‌های آموزشی</h2>
+    <div class="line"></div>
+  </div>
+  <div class="product-grid" id="lessonGrid"></div>
+</section>
+
+<!-- ═══════════════ بخش ویدیو ═══════════════ -->
+<section id="video">
+  <div class="section-header">
+    <div class="tag">✦ پشت صحنه ✦</div>
+    <h2>مراحل دوخت گلدوزی</h2>
+    <div class="line"></div>
+  </div>
+  <div class="video-box">
+    <!-- کد ویدیوی خودت رو اینجا بذار (آپارات یا اینستاگرام) -->
+    <iframe src="https://www.aparat.com/video/video/embed/videohash/YOUR_CODE/vt/frame" allowfullscreen></iframe>
+  </div>
+</section>
+
+<!-- ═══════════════ بخش نظرات ═══════════════ -->
+<section id="testimonials">
+  <div class="testimonials">
+    <div class="section-header">
+      <div class="tag" style="color:var(--gold-light);">✦ اعتماد شما ✦</div>
+      <h2>نظرات مشتریان</h2>
+      <div class="line"></div>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>کیفیت کار فوق‌العاده‌ست. طرح‌ها دقیقاً مثل عکس‌ها بود و حتی زیباتر!</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">ف</div>
+          <div>فاطمه — تهران</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>آموزش‌ها خیلی ساده و کاربردی بود. بعد از یک ماه تونستم اولین کارم رو بفروشم!</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">ز</div>
+          <div>زهرا — اصفهان</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>سفارش عروسیم رو دادم و واقعاً شگفت‌زده شدم. دست‌ساز واقعی با عشق.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">م</div>
+          <div>مریم — مشهد</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ سوالات متداول ═══════════════ -->
+<section id="faq">
+  <div class="section-header">
+    <div class="tag">✦ پاسخ به شما ✦</div>
+    <h2>سوالات متداول</h2>
+    <div class="line"></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">هر سفارش چقدر زمان می‌بره؟ <i class="fas fa-chevron-down"></i></div>
+    <div class="faq-a">بسته به پیچیدگی طرح، معمولاً بین ۳ تا ۱۴ روز کاری زمان می‌بره.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">به شهرستان‌ها هم ارسال دارید؟ <i class="fas fa-chevron-down"></i></div>
+    <div class="faq-a">بله، به سراسر ایران با پست یا تیپاکس ارسال می‌کنیم.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">سفارش شخصی با طرح دلخواه می‌گیرید؟ <i class="fas fa-chevron-down"></i></div>
+    <div class="faq-a">بله! کافیه طرح مورد نظرتون رو از طریق فرم سفارش شخصی یا واتساپ بفرستید.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">نحوه پرداخت چطوره؟ <i class="fas fa-chevron-down"></i></div>
+    <div class="faq-a">نصف مبلغ به عنوان پیش‌پرداخت و مابقی قبل از ارسال دریافت می‌شه.</div>
+  </div>
+</section>
+
+<!-- ═══════════════ فرم سفارش شخصی ═══════════════ -->
+<section id="order">
+  <div class="section-header">
+    <div class="tag">✦ سفارش دلخواه ✦</div>
+    <h2>سفارش شخصی‌سازی‌شده</h2>
+    <div class="line"></div>
+  </div>
+  <div class="order-form">
+    <input type="text" id="ordName" placeholder="نام شما">
+    <input type="tel" id="ordPhone" placeholder="شماره تماس">
+    <textarea id="ordDesc" rows="4" placeholder="توضیح سفارش (چه طرحی می‌خواید؟)"></textarea>
+    <button onclick="sendOrder()"><i class="fab fa-whatsapp"></i> ارسال سفارش به واتساپ</button>
+  </div>
+</section>
+
+<!-- ═══════════════ بخش تماس ═══════════════ -->
+<section id="contact">
+  <div class="section-header">
+    <div class="tag">✦ در ارتباط باشید ✦</div>
+    <h2>تماس با ما</h2>
+    <div class="line"></div>
+  </div>
+  <div class="contact-grid">
+    <a href="tel:09902961185" class="contact-item">
+      <i class="fas fa-phone-alt"></i>
+      <div class="title">تلفن اول</div>
+      <div class="value">۰۹۹۰۲۹۶۱۱۸۵</div>
+    </a>
+    <a href="tel:09158797212" class="contact-item">
+      <i class="fas fa-phone-volume"></i>
+      <div class="title">تلفن دوم</div>
+      <div class="value">۰۹۱۵۸۷۹۷۲۱۲</div>
+    </a>
+    <a href="https://instagram.com/goldozi_delvan" target="_blank" class="contact-item">
+      <i class="fab fa-instagram"></i>
+      <div class="title">اینستاگرام</div>
+      <div class="value">@goldozi_delvan</div>
+    </a>
+    <a href="https://wa.me/989902961185" target="_blank" class="contact-item">
+      <i class="fab fa-whatsapp"></i>
+      <div class="title">واتساپ</div>
+      <div class="value">پیام مستقیم</div>
+    </a>
+  </div>
+  <p style="text-align:center; margin-top:25px; color:#666;">
+    <i class="fas fa-map-marker-alt" style="color:var(--gold);"></i>
+    خراسان رضوی، شهرستان جوین، روستای ارگ
+  </p>
+</section>
+
+<!-- ═══════════════ لایت‌باکس ═══════════════ -->
+<div class="lightbox" id="lightbox">
+  <span class="close-lb" onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<!-- ═══════════════ دکمه‌های شناور ═══════════════ -->
+<a href="https://wa.me/989902961185" target="_blank" class="float-wa"><i class="fab fa-whatsapp"></i></a>
+<div class="float-top" id="floatTop"><i class="fas fa-arrow-up"></i></div>
+
+<!-- ═══════════════ فوتر ═══════════════ -->
+<footer>
+  <div class="logo"><i class="fas fa-spa"></i> گلدوزی دلوان تیک</div>
+  <p>© ۱۴۰۵ — تمامی حقوق محفوظ است</p>
+</footer>
+
+<script>
+// ═══════════════ تبدیل عدد به فارسی ═══════════════
+function toFa(n) {
+  return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+}
+
+// ═══════════════ داده‌های سایت (اینجا رو ویرایش کن) ═══════════════
+const WHATSAPP = "989902961185";
+
+const siteData = {
+  products: [
+    {
+      title: "طرح گل سرخ مجلسی",
+      description: "گلدوزی دست‌دوز برای شال و روسری",
+      price: "۳۵۰,۰۰۰",
+      oldPrice: "۴۲۰,۰۰۰",
+      image: "https://via.placeholder.com/400x300/0f3d2e/d4af37?text=عکس+۱",
+      badge: "پرفروش",
+      category: "مجلسی"
+    },
+    {
+      title: "طرح بلبل و گل",
+      description: "مناسب برای عروس و مناسبت‌های خاص",
+      price: "۵۸۰,۰۰۰",
+      oldPrice: "",
+      image: "https://via.placeholder.com/400x300/0f3d2e/d4af37?text=عکس+۲",
+      badge: "ویژه",
+      category: "عروس"
+    },
+    {
+      title: "طرح گل محمدی",
+      description: "طراحی سنتی ایرانی با نخ طلایی",
+      price: "۲۹۰,۰۰۰",
+      oldPrice: "",
+      image: "https://via.placeholder.com/400x300/0f3d2e/d4af37?text=عکس+۳",
+      badge: "جدید",
+      category: "روزمره"
+    }
+  ],
+  lessons: [
+    {
+      title: "آموزش مبتدی",
+      description: "پایه‌های گلدوزی با نخ و سوزن",
+      price: "۴۵۰,۰۰۰",
+      oldPrice: "",
+      image: "https://via.placeholder.com/400x300/0f3d2e/d4af37?text=مبتدی",
+      badge: "شروع",
+      category: "روزمره"
+    },
+    {
+      title: "سطح پیشرفته",
+      description: "طراحی الگوهای مجلسی",
+      price: "۷۵۰,۰۰۰",
+      oldPrice: "",
+      image: "https://via.placeholder.com/400x300/0f3d2e/d4af37?text=پیشرفته",
+      badge: "محبوب",
+      category: "مجلسی"
+    },
+    {
+      title: "کلاس خصوصی",
+      description: "آموزش شخصی‌سازی‌شده",
+      price: "۹۵۰,۰۰۰",
+      oldPrice: "",
+      image: "https://via.placeholder.com/400x300/0f3d2e/d4af37?text=خصوصی",
+      badge: "VIP",
+      category: "عروس"
+    }
+  ]
+};
+
+// ═══════════════ ساخت کارت محصول ═══════════════
+function makeCard(item) {
+  const waMsg = encodeURIComponent("سلام، من به «" + item.title + "» علاقه‌مندم. لطفاً راهنمایی کنید.");
+  return '<div class="product-card" data-cat="' + item.category + '">' +
+    '<div class="product-img" onclick="openLightbox(\'' + item.image + '\')">' +
+      '<img src="' + item.image + '" alt="' + item.title + '">' +
+      '<div class="product-badge">' + item.badge + '</div>' +
+    '</div>' +
+    '<div class="product-info">' +
+      '<h3>' + item.title + '</h3>' +
+      '<p>' + item.description + '</p>' +
+      '<div class="product-price">' + item.price + ' تومان ' +
+        (item.oldPrice ? '<span class="old">' + item.oldPrice + '</span>' : '') +
+      '</div>' +
+      '<div class="product-actions">' +
+        '<a href="https://wa.me/' + WHATSAPP + '?text=' + waMsg + '" target="_blank" class="btn-order">' +
+          '<i class="fab fa-whatsapp"></i> سفارش' +
+        '</a>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+// ═══════════════ نمایش محصولات و آموزش‌ها ═══════════════
+document.getElementById('productGrid').innerHTML = siteData.products.map(makeCard).join('');
+document.getElementById('lessonGrid').innerHTML = siteData.lessons.map(makeCard).join('');
+
+// ═══════════════ فیلتر محصولات ═══════════════
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('#productGrid .product-card').forEach(card => {
+      card.classList.toggle('hide', f !== 'all' && card.dataset.cat !== f);
+    });
+  });
+});
+
+// ═══════════════ لایت‌باکس (بزرگ‌نمایی عکس) ═══════════════
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('show');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('show');
+}
+
+document.getElementById('lightbox').addEventListener('click', e => {
+  if (e.target.id === 'lightbox') closeLightbox();
+});
+
+// ═══════════════ تایمر شمارش معکوس (تا جمعه) ═══════════════
+function nextFriday() {
+  const d = new Date();
+  const day = d.getDay();
+  const diff = (5 - day + 7) % 7 || 7;
+  d.setDate(d.getDate() + diff);
+  d.setHours(23, 59, 59);
+  return d;
+}
+
+const target = nextFriday();
+
+setInterval(() => {
+  const now = new Date();
+  let diff = target - now;
+  if (diff < 0) diff = 0;
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  const secs = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-days').textContent = toFa(days);
+  document.getElementById('cd-hours').textContent = toFa(hours);
+  document.getElementById('cd-mins').textContent = toFa(mins);
+  document.getElementById('cd-secs').textContent = toFa(secs);
+}, 1000);
+
+// ═══════════════ سوالات متداول (آکاردئون) ═══════════════
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    q.parentElement.classList.toggle('open');
+  });
+});
+
+// ═══════════════ فرم سفارش شخصی ═══════════════
+function sendOrder() {
+  const name = document.getElementById('ordName').value.trim();
+  const phone = document.getElementById('ordPhone').value.trim();
+  const desc = document.getElementById('ordDesc').value.trim();
+  if (!name || !desc) {
+    alert('لطفاً نام و توضیح سفارش رو وارد کنید.');
+    return;
+  }
+  const msg = encodeURIComponent("سلام، سفارش شخصی جدید:\n\nنام: " + name + "\nتلفن: " + phone + "\nتوضیح: " + desc);
+  window.open("https://wa.me/" + WHATSAPP + "?text=" + msg, '_blank');
+}
+
+// ═══════════════ منوی همبرگری ═══════════════
+const hamburger = document.getElementById('hamburger');
+const sideMenu = document.getElementById('sideMenu');
+const overlay = document.getElementById('overlay');
+
+function toggleMenu() {
+  hamburger.classList.toggle('active');
+  sideMenu.classList.toggle('open');
+  overlay.classList.toggle('show');
+}
+
+hamburger.addEventListener('click', toggleMenu);
+overlay.addEventListener('click', toggleMenu);
+
+document.querySelectorAll('.side-menu a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    sideMenu.classList.remove('open');
+    overlay.classList.remove('show');
+  });
+});
+
+// ═══════════════ اسکرول نرم ═══════════════
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const t = document.querySelector(this.getAttribute('href'));
+    if (t) {
+      e.preventDefault();
+      t.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+// ═══════════════ دکمه بازگشت به بالا ═══════════════
+const floatTop = document.getElementById('floatTop');
+
+window.addEventListener('scroll', () => {
+  floatTop.classList.toggle('show', window.scrollY > 500);
+});
+
+floatTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ═══════════════ مخفی کردن لودینگ ═══════════════
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hide');
+  }, 800);
+});
+</script>
+</body>
+</html>
